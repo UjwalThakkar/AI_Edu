@@ -18,6 +18,7 @@ export default {
           4: "#7ADB78",
           5: "#858DFF",
           6: "#FF98E2",
+          7: "#11192899",
         },
         stroke: {
           1: "#26242C",
@@ -80,6 +81,10 @@ export default {
         "benefit-card-4": "url(assets/benefits/card-4.svg)",
         "benefit-card-5": "url(assets/benefits/card-5.svg)",
         "benefit-card-6": "url(assets/benefits/card-6.svg)",
+        "hero-image": "url(assets/background.jpg)",
+      },
+      boxShadow: {
+        "111xl": "0 8px 32px 0 rgba( 31, 38, 135, 0.37 )",
       },
     },
   },

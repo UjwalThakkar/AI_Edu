@@ -6,6 +6,8 @@ import MenuSvg from "../assets/svg/MenuSvg";
 import {HamburgerMenu} from "./design/Header";
 import {useState} from "react";
 
+import { Link } from "react-router-dom";
+
 const Header = () => {
   const pathname = useLocation();
  const  [openNavigation, setOpenNavigation] = useState (false);
@@ -58,9 +60,8 @@ const Header = () => {
         <a href="#signup" className="button hidden mr-8 text-n-1/50 transition-colors hover:text-n-1 lg:block">
         New account 
         </a>
-        <Button className="hidden lg:flex" href="#login">
-            Sign in
-            
+        <Button className="hidden lg:flex" >
+            <Link to="Login">Sign in</Link>
         </Button>
 
         <Button className='ml-auto lg:hidden' px="px-3" onClick={toggleNavigation}>
