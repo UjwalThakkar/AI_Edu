@@ -2,12 +2,10 @@ import { reducerCases } from "./constants";
 
 export const initialState = {
   userInformation: undefined,
-  all_branch: undefined,
   branch: undefined,
-  all_sem: undefined,
   sem: undefined,
-  all_sub: undefined,
   sub: undefined,
+  resource: undefined,
 };
 
 const reducer = (state, action) => {
@@ -24,34 +22,22 @@ const reducer = (state, action) => {
         branch: action.branch,
       };
 
-      case reducerCases.SET_ALL_BRANCH:
-      return {
-        ...state,
-        all_branch: action.all_branch,
-      };
-
-    case reducerCases.SET_ALL_SEM:
-      return {
-        ...state,
-        all_sem: action.all_sem,
-      };
-
     case reducerCases.SET_SEM:
       return {
         ...state,
         sem: action.sem,
       };
 
-    case reducerCases.SET_ALL_SUB:
-      return {
-        ...state,
-        all_sub: action.all_sub,
-      };
-
     case reducerCases.SET_SUB:
       return {
         ...state,
         sub: action.sub,
+      };
+
+    case reducerCases.SET_RESOURCES:
+      return {
+        ...state,
+        resource: action.resource,
       };
 
     default:

@@ -52,9 +52,9 @@ const Dashboard = () => {
   }, [selectedSemester]);
 
   const TileContainer = () => {
-    console.log(
-      `from state manager sem: ${sem}, and branch: ${branch}, and selected_subject: ${sub}`
-    );
+    // console.log(
+    //   `from state manager sem: ${sem}, and branch: ${branch}, and selected_subject: ${sub}`
+    // );
     return (
       <div className="w-[100vw] h-[90%] p-10 flex flex-col justify-start items-start gap-5">
         {subjects.length != 0 ? (

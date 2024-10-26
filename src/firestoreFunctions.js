@@ -1,4 +1,6 @@
 import { getFirestore, collection, getDocs, doc } from "firebase/firestore";
+import { getDownloadURL, ref } from "firebase/storage";
+import { storage } from "./firebaseConfig";
 
 // Initialize Firestore
 const db = getFirestore();
@@ -35,3 +37,6 @@ export const fetchResources = async (branchId, semesterId, subjectId) => {
   const resourcesSnapshot = await getDocs(resourcesCol);
   return resourcesSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
 };
+
+
+  
