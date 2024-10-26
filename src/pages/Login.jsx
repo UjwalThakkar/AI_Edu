@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 import { heroBackground } from "../assets";
 import Login1 from "../components/Login/Login1.jsx";
 import Login2 from "../components/Login/Login2.jsx";
+import { useStateProvider } from "../lib/stateContext.jsx";
+import { reducerCases } from "../lib/constants.js";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -20,6 +22,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [userType, setUserType] = useState("");
   const [instituteName, setInstituteName] = useState("");
+  const [{ userInformation }, dispatch] = useStateProvider();
+
   const navigate = useNavigate();
 
   const signUpButton = useRef(null);
@@ -92,6 +96,14 @@ const Login = () => {
       // if (userDoc.exists()) {
       if (res) {
         // setCurrentUser(userDoc.data());
+        dispatch({
+          type: reducerCases.SET_USER_INFO,
+          userInformation: {
+            uid: res.user.uid,
+            ...userDoc.data(),
+          },
+        });
+
         navigate("/");
         // toast.success("Welcome Back!");
       } else {
@@ -134,7 +146,7 @@ const Login = () => {
       useNavigate("/");
     } catch (err) {
       if (err.code === "auth/email-already-in-use") {
-        // toast.error("The email address is already in use by another account.");  
+        // toast.error("The email address is already in use by another account.");
       } else {
         // toast.error(err.message);
       }

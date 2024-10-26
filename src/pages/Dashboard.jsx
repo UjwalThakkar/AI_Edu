@@ -4,8 +4,11 @@ import {
   fetchSemesters,
   fetchSubjects,
 } from "../firestoreFunctions";
+import { auth } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import Subject from "./Subject";
+import { useStateProvider } from "../lib/stateContext";
+import { reducerCases } from "../lib/constants";
 
 const Dashboard = () => {
   const [branches, setBranches] = useState([]);
@@ -14,6 +17,7 @@ const Dashboard = () => {
   const [selectedBranch, setSelectedBranch] = useState(null);
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
+  const [{ userInformation, branch, sem, sub }, dispatch] = useStateProvider();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -48,6 +52,9 @@ const Dashboard = () => {
   }, [selectedSemester]);
 
   const TileContainer = () => {
+    console.log(
+      `from state manager sem: ${sem}, and branch: ${branch}, and selected_subject: ${sub}`
+    );
     return (
       <div className="w-[100vw] h-[90%] p-10 flex flex-col justify-start items-start gap-5">
         {subjects.length != 0 ? (
@@ -57,7 +64,22 @@ const Dashboard = () => {
               // onClick={() => {
               //   navigate(`/Subject/${subject.id}`);
               // }}
-              onClick={() => setSelectedSubject(subject.id)}
+              onClick={() => {
+                dispatch({
+                  type: reducerCases.SET_BRANCH,
+                  branch: selectedBranch,
+                });
+                dispatch({
+                  type: reducerCases.SET_SEM,
+                  sem: selectedSemester,
+                });
+                dispatch({
+                  type: reducerCases.SET_SUB,
+                  sub: subject.id,
+                });
+
+                setSelectedSubject(subject.id);
+              }}
               className="cards w-[280px] h-[180px] bg-orange-300 rounded-xl flex flex-col shadow-lg border-[1px] border-gray-200 hover:shadow-xl hover:scale-[105%] transition-all ease-in-out"
             >
               <div className=" w-full h-[40%] text-white px-5 py-4 flex flex-row justify-between items-center">
@@ -78,7 +100,18 @@ const Dashboard = () => {
   return (
     <div className="w-[100vw] h-[100vh] flex flex-col justify-start items-start flex-wrap bg-white">
       <div className="navbar w-[100%] h-[10%] shadow-lg bg-blue-50 flex flex-row justify-between items-center px-5">
-        <h1 className="text-xl text-black font-extrabold">Dashboard</h1>
+        <h1
+          className="text-xl text-black font-extrabold cursor-pointer"
+          onClick={() => {
+            dispatch({
+              type: reducerCases.SET_SUB,
+              sub: undefined,
+            });
+            navigate("/");
+          }}
+        >
+          Dashboard
+        </h1>
         <div className="overflow-hidden w-[20%] h-[100%]">
           <select
             className="w-[45%] h-[100%] bg-gray-100 text-black"
@@ -106,11 +139,22 @@ const Dashboard = () => {
             </select>
           )}
         </div>
+        {/* <h2 className="text-black">welcome {userInformation.username}</h2> */}
         <div className=" w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-2xl">
           U
         </div>
+        <div className="text-black border-[1px] border-black">
+          <button
+            onClick={() => {
+              console.log("signing user out!");
+              auth.signOut();
+            }}
+          >
+            signOut
+          </button>
+        </div>
       </div>
-      {selectedSubject ? <Subject /> : <TileContainer />}
+      {sub ? <Subject /> : <TileContainer />}
     </div>
   );
 };

@@ -1,0 +1,9 @@
+export const reducerCases = {
+  SET_USER_INFO: "SET_USER_INFO",
+  SET_BRANCH: "SET_BRANCH",
+  SET_SEM: "SET_SEM",
+  SET_SUB: "SET_SUB",
+  SET_ALL_BRANCH: "SET_ALL_BRANCH",
+  SET_ALL_SEM: "SET_ALL_SEM",
+  SET_ALL_SUB: "SET_ALL_SUB",
+};
