@@ -23,6 +23,9 @@ const Chat = () => {
     <div className="flex flex-col h-[100%] bg-gray-700">
         <div className="h-[auto] overflow-y-auto">
             <div className="p-[20px] flex overflow-auto flex-col gap[20px">
+              <div className="flex flex-col-reverse w-[auto] h-5 p-2 bg-blue-300">
+                hello!
+              </div>
                 <div className="message max-w-[70%] flex gap-[20px]"></div>
             </div>
         </div>

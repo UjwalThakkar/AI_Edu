@@ -56,7 +56,7 @@ const Dashboard = () => {
     //   `from state manager sem: ${sem}, and branch: ${branch}, and selected_subject: ${sub}`
     // );
     return (
-      <div className="w-[100vw] h-[90%] p-10 flex flex-col justify-start items-start gap-5">
+      <div className="w-[100vw] h-[90%] p-10 flex flex-row justify-start items-start gap-10">
         {subjects.length != 0 ? (
           subjects.map((subject) => (
             <div

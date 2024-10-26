@@ -33,7 +33,7 @@ const Documents = () => {
       {resource.map((res) => (
         <div
           key={res.id}
-          className="text-black w-[80%] h-[auto] border-[1px] border-gray-300 rounded-xl shadow"
+          className="text-black w-[80%] h-[auto] border-[1px] border-gray-300 rounded-xl shadow-sm hover:shadow-lg transition-all ease-in-out p-2"
         >
           <h3>{res.name.toUpperCase()}</h3>
           <p>Uploaded on: {res.timestamp?.toDate().toLocaleString()}</p>
